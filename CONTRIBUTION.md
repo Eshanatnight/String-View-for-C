@@ -7,7 +7,7 @@ fork the repository
 clone the repository
 
 ```PowerShell
-    git clone https://github.com/Eshanatnight/String View for C
+    git clone https://github.com/Eshanatnight/String-View-for-C
 ```
 
 </br>
