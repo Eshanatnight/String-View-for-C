@@ -1,0 +1,13 @@
+# IDE and Code Editor Files and Folders
+/.idea
+/.vscode
+/.vs
+
+# Binaries
+*.exe
+
+#CMAKE Build Folder and Binary Folder
+/build
+/cmake-build-debug
+/cmake-build-release
+/bin
