@@ -52,7 +52,7 @@ bool svIndexOf(StringView sv, char c, size_t* index);
 bool svIsEqual(StringView a, StringView b);
 bool svStartsWith(StringView sv, StringView prefix);
 bool svEndsWith(StringView sv, StringView suffix);
-uint64_t svTou64(StringView sv);
+uint64_t StringViewTouint64(StringView sv);
 
 
 

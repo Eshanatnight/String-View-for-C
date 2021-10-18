@@ -2,6 +2,7 @@
 #include "string_view.h"
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 
@@ -289,5 +290,42 @@ bool svStartsWith(StringView sv, StringView prefix)
 
 bool svEndsWith(StringView sv, StringView suffix)
 {
+    if(sv.m_count <= suffix.m_count)
+    {
+        StringView sv_Suffix = svFromParts(sv.m_data + sv.m_count - suffix.m_count, suffix.m_count);
+        return svIsEqual(sv_Suffix, suffix);
+    }
 
+    return false;
 }
+
+
+uint64_t StringViewTouint64(StringView sv)
+{
+    uint64_t result = 0;
+    for(size_t i = 0; i < sv.m_count && isdigit(sv.m_data[i]); ++i)
+        result = result * 10 + (sv.m_data[i] - '0');
+
+    return result;
+}
+
+/*
+    *   @brief: the implementation belows should work logically
+        but remains untested.
+
+    Todo: test the following implementation.
+uint64_t StringViewTouint64(StringView sv)
+{
+    uint64_t result = 0;
+    for (size_t i = 0; i < sv.m_count; i++)
+    {
+        char c = sv.m_data[i];
+        if (c < '0' || c > '9')
+            return 0;
+
+        result = result * 10 + (c - '0');
+    }
+
+    return result;
+}
+*/
