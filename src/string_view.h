@@ -40,11 +40,11 @@ StringView svTrim(StringView sv);
 StringView svTrimLeft(StringView sv);
 StringView svTrimRight(StringView sv);
 
-// TODO
 StringView svTakeLeftWhile(StringView sv, bool (*predicate)(char x));
 
-StringView svChopByDelim(StringView* sv, char delim);
 bool try_svChopByDelim(StringView* sv, char delim, StringView* chunk);
+StringView svChopByDelim(StringView* sv, char delim);
+
 StringView svChopLeft(StringView* sv, size_t count);
 StringView svChopRight(StringView* sv, size_t count);
 StringView svChopLeftWhile(StringView* sv, bool (*predicate)(char x));

@@ -143,3 +143,97 @@ StringView svTakeLeftWhile(StringView sv, bool (*predicate)(char x))
         return svFromParts(sv.m_data, i);
     }
 */
+
+bool try_svChopByDelim(StringView* sv, char delim, StringView* chunk)
+{
+    size_t i = 0;
+    while (i < sv->m_count && sv->m_data[i] != delim)
+        i += 1;
+
+    StringView result = svFromParts(sv->m_data, i);
+
+    if (i < sv->m_count)
+    {
+        sv->m_count -= i + 1;
+        sv->m_data  += i + 1;
+        if (chunk)
+            *chunk = result;
+
+        return true;
+    }
+
+    return false;
+}
+
+
+StringView svChopByDelim(StringView* sv, char delim)
+{
+    size_t i = 0;
+    while (i < sv->m_count && sv->m_data[i] != delim) {
+        i += 1;
+    }
+
+    StringView result = svFromParts(sv->m_data, i);
+
+    if (i < sv->m_count) {
+        sv->m_count -= i + 1;
+        sv->m_data  += i + 1;
+    }
+    else
+    {
+        sv->m_count -= i;
+        sv->m_data  += i;
+    }
+
+    return result;
+}
+
+/*
+    *   @brief: the following implementations is never tested,
+        but it might be more efficient over readability.
+
+    Todo: test the following implementation.
+    StringView svChopByDelim_2(StringView* sv, char delim)
+    {
+    StringView chunk;
+    if (try_svChopByDelim(&sv, delim, &chunk))
+        return chunk;
+    else
+        return *sv;
+    }
+*/
+
+StringView svChopLeft(StringView* sv, size_t count)
+{
+    if(sv->m_count < count)
+        count = sv->m_count;
+
+    StringView result = svFromParts(sv->m_data, count);
+
+    sv->m_data += count;
+    sv->m_count -= count;
+
+    return result;
+}
+
+StringView svChopRight(StringView* sv, size_t count)
+{
+    if(sv->m_count < count)
+        count = sv->m_count;
+
+    StringView result = svFromParts(sv->m_data + sv->m_count - count, count);
+
+    sv->m_count -= count;
+
+    return result;
+}
+
+StringView svChopLeftWhile(StringView* sv, bool (*predicate)(char x))
+{
+    size_t i = 0;
+    while (i < sv->m_count && predicate(sv->m_data[i]))
+        i += 1;
+
+    return svChopLeft(sv, i);
+}
+
