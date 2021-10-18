@@ -237,3 +237,57 @@ StringView svChopLeftWhile(StringView* sv, bool (*predicate)(char x))
     return svChopLeft(sv, i);
 }
 
+bool svIndexOf(StringView sv, char c, size_t* index)
+{
+    size_t i = 0;
+    while (i < sv.m_count && sv.m_data[i] != c)
+        i += 1;
+
+    if (i < sv.m_count)
+    {
+        if (index)
+            *index = i;
+        return true;
+    }
+
+    return  false;
+}
+
+bool svIsEqual(StringView a, StringView b)
+{
+    if (a.m_count != b.m_count)
+        return false;
+
+    if (a.m_count == 0)
+        return true;
+
+    return memcmp(a.m_data, b.m_data, a.m_count) == 0;
+}
+
+/*
+    *   @brief: the above implementation has an extra safety check
+        for the case when a.m_count == 0. which may be an extra comparison that is not needed.
+bool svIsEqual(StringView a, StringView b)
+{
+    if (a.m_count != b.m_count)
+        return false;
+
+    return memcmp(a.m_data, b.m_data, a.m_count) == 0;
+}
+*/
+
+bool svStartsWith(StringView sv, StringView prefix)
+{
+    if (sv.m_count <= prefix.m_count)
+    {
+        StringView sv_Prefix = svFromParts(sv.m_data, prefix.m_count);
+        return svIsEqual(sv_Prefix, prefix);
+    }
+
+    return false;
+}
+
+bool svEndsWith(StringView sv, StringView suffix)
+{
+
+}
