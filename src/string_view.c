@@ -40,7 +40,7 @@ StringView svTrim(StringView sv)
 }
 
 /*
-    * @brief: Another Possible Implementation of svTrim
+    *   @brief: Another Possible Implementation of svTrim
 
     StringView svTrim(StringView sv)
     {
@@ -70,7 +70,7 @@ StringView svTrimLeft(StringView sv)
 }
 
 /*
-    @brief: This is another possible implementation for svTrimLeft,
+    *   @brief: This is another possible implementation for svTrimLeft,
             but is less efficient and creates a copy of sv ,
             but it is more readable.
 
@@ -83,4 +83,63 @@ StringView svTrimLeft(StringView sv)
         return svFromParts(sv.m_data + i, sv.m_count - i);
     }
 
+*/
+
+StringView svTrimRight(StringView sv)
+{
+    // returns a view of the string, or an empty view if the string is NULL
+    if (sv.m_data == NULL)
+        return sv;
+
+    // trim trailing whitespace
+    while (sv.m_count > 0 && sv.m_data[sv.m_count - 1] == ' ')
+        sv.m_count--;
+
+    return sv;
+}
+
+/*
+    *   @brief: This is another possible implementation for svTrimRight,
+            but is less efficient and creates a copy of sv ,
+            but it is more readable.
+
+    StringView svTrimRight(StringView sv)
+    {
+        size_t i = 0;
+        while(i < sv.m_count && sv.m_data[i] == ' ')
+            i++;
+
+        return svFromParts(sv.m_data, sv.m_count - i);
+    }
+*/
+
+StringView svTakeLeftWhile(StringView sv, bool (*predicate)(char x))
+{
+    // returns a view of the string, or an empty view if the string is NULL
+    if (sv.m_data == NULL)
+        return sv;
+
+    // trim leading whitespace
+    while (sv.m_count > 0 && predicate(sv.m_data[0]))
+    {
+        sv.m_data++;
+        sv.m_count--;
+    }
+
+    return sv;
+}
+
+/*
+    *   @brief: This is another possible implementation for svTakeLeftWhile,
+            but is less efficient and creates a copy of sv,
+            but it is more readable.
+
+    StringView svTakeLeftWhile(StringView sv, bool (*predicate)(char x))
+    {
+        size_t i = 0;
+        while(i < sv.m_count && predicate(sv.m_data[i]))
+            i++;
+
+        return svFromParts(sv.m_data, i);
+    }
 */
