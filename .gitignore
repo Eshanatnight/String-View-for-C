@@ -10,8 +10,12 @@
 /build
 /cmake-build-debug
 /cmake-build-release
+<<<<<<< HEAD
 /bin
 
 # Version Control
 gitLog.git
 gitlog.git
+=======
+/bin
+>>>>>>> 36c24fe356493dd2fdc6fe71a34e0ade05dc1ff4

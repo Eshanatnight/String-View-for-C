@@ -10,4 +10,8 @@ test-c: test.c sv.c sv.h
 	$(CC) $(CFLAGS) -o test-c test.c
 
 test-cxx: test.c sv.c sv.h
+<<<<<<< HEAD
 	$(CXX) $(CXXFLAGS) -x c++ -o test-cxx test.c
+=======
+	$(CXX) $(CXXFLAGS) -x c++ -o test-cxx test.c
+>>>>>>> 36c24fe356493dd2fdc6fe71a34e0ade05dc1ff4
