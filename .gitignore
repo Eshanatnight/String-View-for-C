@@ -11,3 +11,7 @@
 /cmake-build-debug
 /cmake-build-release
 /bin
+
+# Version Control
+gitLog.git
+gitlog.git
