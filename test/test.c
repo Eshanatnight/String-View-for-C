@@ -1,4 +1,4 @@
-#include "./src/string_view.h"
+#include "../src/string_view.h"
 #include <stdio.h>
 
 #include <stdio.h>
@@ -9,7 +9,7 @@ void sv_assert_eq_StringView(const char *file, size_t line,
                               const char *expected_expr, StringView expected,
                               const char *actual_expr, StringView actual)
 {
-    if (!sv_eq(expected, actual)) {
+    if (!svIsEqual(expected, actual)) {
         fprintf(stderr, "%s:%zu: FAILED: %s == %s\n",
                 file, line, expected_expr, actual_expr);
         fprintf(stderr, "  EXPECTED: " SV_FMT "\n", SV_Arg(expected));
@@ -195,19 +195,19 @@ int main(void)
     // Index of
     {
         size_t index = 0;
-        ASSERT_TRUE(sv_index_of(SV("hello world"), ' ', &index));
+        ASSERT_TRUE(svIndexOf(SV("hello world"), ' ', &index));
         ASSERT_EQ(size_t, 5, index);
     }
 
     // Prefix/suffix check
     {
-        ASSERT_TRUE(sv_starts_with(SV("Hello, World"), SV("Hello")));
-        ASSERT_TRUE(sv_ends_with(SV("Hello, World"), SV("World")));
+        ASSERT_TRUE(svStartsWith(SV("Hello, World"), SV("Hello")));
+        ASSERT_TRUE(svEndsWith(SV("Hello, World"), SV("World")));
     }
 
     // To Integer
     {
-        ASSERT_EQ(uint64_t, 1234567890, sv_to_u64(SV("1234567890")));
+		ASSERT_EQ(uint64_t, 1234567890, StringViewToU64(SV("1234567890")));
     }
 
     printf("OK\n");
